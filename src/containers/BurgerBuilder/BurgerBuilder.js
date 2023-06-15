@@ -29,7 +29,6 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     axios
       .get(
         "https://react-my-burger-845a4-default-rtdb.firebaseio.com/ingredients.json"
@@ -88,33 +87,14 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    // this.setState({ loading: true });
-    // // alert('You continued');
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: "Belal Elsiesy",
-    //     address: {
-    //       street: "Main St",
-    //       zipCode: "10001",
-    //       country: "USA",
-    //     },
-    //     email: "test@test.com",
-    //   },
-    //   deliveryMethod: "fastest",
-    // };
-    // axios
-    //   .post("/orders.json", order)
-    //   .then((response) => {
-    //     this.setState({ loading: false, purchasing: false });
-    //   })
-    //   .catch((error) => {
-    //     this.setState({ loading: false, purchasing: false });
-    //   });
+    const searchData = {
+      ...this.state.ingredients,
+      price: this.state.totalPrice,
+    };
+    const searchParams = createSearchParams(searchData).toString();
     this.props.navigate({
       pathname: "/checkout",
-      search: createSearchParams(this.state.ingredients).toString(),
+      search: searchParams,
     });
   };
 
